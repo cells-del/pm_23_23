@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
+    <div class="container">
+        <section>
+            @@include('components/head/head.html')
+        </section>
+        <section>
+            @@include('components/content/content.html')
+        </section>
+        <section>
+            @@include('components/footer/footer.html')
+        </section>
+    </div>
 
+    <script src="js/script.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
