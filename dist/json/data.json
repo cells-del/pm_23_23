@@ -1,0 +1,16 @@
+{
+  "header": {
+    "text2": "Hello.",
+    "text3": "I'm",
+    "text4": "John Harrie"
+  },
+
+  "skills": [
+    { "name": "Graphic Designing", "value": 80 },
+    { "name": "Web Designing", "value": 75 },
+    { "name": "Microsoft Word", "value": 60 },
+    { "name": "Affinity Designer", "value": 85 },
+    { "name": "MS Powerpoint", "value": 90 },
+    { "name": "Corel i Draw", "value": 70 }
+  ]
+}

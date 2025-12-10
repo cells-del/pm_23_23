@@ -1,37 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("text2").textContent = "Hello.";
-    document.getElementById("text3").textContent = "I'm";
-    document.getElementById("text4").textContent = "John Harrie";
+    fetch("json/data.json")
+        .then(res => res.json())
+        .then(data => {
 
-    const skillsData = [
-        { name: "Graphic Designing", value: 80 },
-        { name: "Web Designing", value: 75 },
-        { name: "Microsoft Word", value: 60 },
-        { name: "Affinity Designer", value: 85 },
-        { name: "MS Powerpoint", value: 90 },
-        { name: "Corel i Draw", value: 70 }
-    ];
+            document.getElementById("text2").textContent = data.header.text2;
+            document.getElementById("text3").textContent = data.header.text3;
+            document.getElementById("text4").textContent = data.header.text4;
 
-    const skillsContainer = document.getElementById("skills");
 
-    skillsData.forEach(skill => {
-        const div = document.createElement("div");
-        div.classList.add("skill");
+            const skillsContainer = document.getElementById("skills");
 
-        div.innerHTML = `
-            <span>${skill.name}</span>
-            <input type="range" value="${skill.value}" max="100">
-        `;
+            data.skills.forEach(skill => {
+                const div = document.createElement("div");
+                div.classList.add("skill");
 
-        skillsContainer.appendChild(div);
-    });
+                div.innerHTML = `
+                    <span>${skill.name}</span>
+                    <input type="range" value="${skill.value}" max="100">
+                `;
 
-    const header = document.getElementById("eduToggle");
-    const content = document.getElementById("eduContent");
-    const arrow = header.querySelector(".arrow");
+                skillsContainer.appendChild(div);
+            });
 
-    header.addEventListener("click", () => {
-        content.classList.toggle("open");
-        arrow.classList.toggle("open");
-    });
+
+            const header = document.getElementById("eduToggle");
+            const content = document.getElementById("eduContent");
+            const arrow = header.querySelector(".arrow");
+
+            header.addEventListener("click", () => {
+                content.classList.toggle("open");
+                arrow.classList.toggle("open");
+            });
+
+        })
+        .catch(err => console.error("JSON load error:", err));
 });
