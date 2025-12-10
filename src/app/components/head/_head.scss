@@ -1,119 +1,157 @@
-.head-pd{
+$accent: #ff6600;
+$text-dark: #333333;
+$text-mid: #282828;
+$line: #d9d9d9;
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+@mixin text($size, $color: $text-dark, $weight: 400) {
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+}
+
+%flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.head-pd {
   padding-left: 110px;
   padding-top: 30px;
   padding-bottom: 60px;
+
+  @media (max-width: 900px) {
+    padding-left: 40px;
+  }
+
+  @media (max-width: 600px) {
+    padding-left: 20px;
+  }
 }
 
-.img{
+.img {
   margin-top: 20px;
-  width: 300px;
-  height: 340px;
+  @include size(300px, 340px);
+
+  @media (max-width: 600px) {
+    @include size(200px, 260px);
+  }
 }
 
 .left-line {
   position: absolute;
   top: 50px;
-  width: 2px;
-  height: 340px;
-  background: #d9d9d9;
+  @include size(2px, 340px);
+  background: $line;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    @include size(22px, 3px);
+    background: $line;
+  }
+
+  &::before {
+    top: 20px;
+    box-shadow: 0 90px 0 $line;
+  }
+
+  &::after {
+    top: 185px;
+    box-shadow: 0 100px 0 $line;
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 
-.left-line::before,
-.left-line::after {
-  content: "";
-  position: absolute;
-  width: 22px;
-  height: 3px;
-  background: #d9d9d9;
+.text-2 {
+  @include text(50px, $text-dark, bold);
+
+  @media (max-width: 600px) {
+    font-size: 35px;
+  }
 }
 
-.left-line::before {
-  top: 20px;
-  box-shadow: 0 90px 0 #d9d9d9;
-}
-
-.left-line::after {
-  top: 185px;
-  box-shadow: 0 100px 0 #d9d9d9;
-}
-
-.text-2{
-  font-size: 50px;
-  color: #333333;
-  font-weight: bold;
-}
-
-.text-3{
+.text-3 {
   margin-left: 5px;
-  font-size: 50px;
-  color: #333333;
-  font-weight: 400;
+  @include text(50px);
+
+  @media (max-width: 600px) {
+    font-size: 35px;
+  }
 }
 
-.text-4{
+.text-4 {
   margin-left: 8px;
-  font-size: 50px;
-  color: #ff6c00;
-  font-weight: bold;
+  @include text(50px, $accent, bold);
+
+  @media (max-width: 600px) {
+    font-size: 35px;
+  }
 }
 
-.text-5{
+.text-5 {
   margin-top: -13px;
-  font-size: 19px;
+  @include text(19px, $text-dark, 400);
   letter-spacing: 7px;
-  color: #333333;
-  font-weight: 400;
-  gap: 15px;
   margin-bottom: 30px;
+
+  @media (max-width: 600px) {
+    font-size: 15px;
+    letter-spacing: 4px;
+  }
 }
 
-.text-6{
+.text-6 {
   width: 110%;
-  font-size: 16px;
+  @include text(16px, $text-mid, 400);
   line-height: 20px;
-  color: #282828;
-  font-weight: 400;
   margin-bottom: 20px;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 }
 
-.bg-2{
-  width: 25px;
-  height: 25px;
-  background-color: #ff6600;
+.bg-2 {
+  @include size(25px, 25px);
+  background-color: $accent;
   color: white;
   border-radius: 3px;
   text-align: center;
 }
 
-.text-7{
+.text-7 {
   margin-top: -5px;
-  font-size: 22px;
+  @include text(22px, $text-dark, 900);
   text-transform: uppercase;
-  color: #333333;
-  font-weight: 900;
-  margin-bottom: 45px
+  margin-bottom: 45px;
 }
 
-.text-8{
-  font-size: 22px;
+.text-8 {
+  @include text(22px, $accent, 700);
   text-transform: uppercase;
-  color: #ff6c00;
-  font-weight: 700;
   margin-top: 33px;
 }
 
-.bg-3{
+.bg-3 {
+  @include size(22px, 20px);
   margin-top: 3px;
-  width: 22px;
-  height: 20px;
   font-size: 13px;
-  background-color: #ff6600;
+  background-color: $accent;
   color: white;
   border-radius: 50%;
   text-align: center;
 }
 
 .location-item {
-  display: flex;
+  @extend %flex-center;
   gap: 5px;
 }

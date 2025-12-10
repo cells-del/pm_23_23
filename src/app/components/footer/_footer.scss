@@ -1,69 +1,86 @@
-.h-line{
-  width: 102.4%;
-  height: 25px;
-  background-color: #f0f0f0;
+$bg-light: #f0f0f0;
+$text-dark: #333333;
+$accent: #ff6600;
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+@mixin flex($gap: 0) {
+  display: flex;
+  gap: $gap;
+}
+
+@mixin text($size, $color: $text-dark, $weight: 400) {
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+}
+
+%line-base {
+  background-color: $bg-light;
+  height: 5px;
+}
+
+.h-line {
+  @include size(102.4%, 25px);
+  background-color: $bg-light;
   margin-left: -13px;
 }
 
-.dis{
+.dis {
   margin-top: 70px;
   display: flex;
 }
 
-.h-line-2{
-  margin-left: -13px;
+.h-line-2 {
+  @extend %line-base;
   width: 100px;
-  height: 5px;
-  background-color: #f0f0f0;
+  margin-left: -13px;
 }
 
-.h-line-3{
+.h-line-3 {
+  @extend %line-base;
   width: 300px;
-  height: 5px;
-  background-color: #f0f0f0;
-  margin-left: 50px ;
+  margin-left: 50px;
 }
 
-.h-line-4{
+.h-line-4 {
+  @extend %line-base;
   width: 181px;
-  height: 5px;
-  background-color: #f0f0f0;
   margin-right: -20px;
 }
 
-.skil{
-  display: flex;
-  gap:  15px;
+.skil {
+  @include flex(15px);
   margin-top: -15px;
   margin-left: 15px;
 }
 
-.skil-2{
-  display: flex;
-  gap:  15px;
+.skil-2 {
+  @include flex(15px);
   margin-top: -15px;
   margin-left: 50px;
   margin-right: 20px;
 }
 
-.skills-pad{
+.skills-pad {
   padding-left: 110px;
   padding-top: 60px;
   padding-bottom: 50px;
 }
 
-.language-pad{
+.language-pad {
   padding-top: 60px;
   padding-right: 10px;
   margin-left: -50px;
   padding-bottom: 50px;
 }
 
-.language-name{
-  font-size: 14px;
+.language-name {
+  @include text(14px, $text-dark, 400);
   line-height: 14px;
-  color: #333333;
-  font-weight: 400;
 }
 
 .skills {
@@ -71,39 +88,39 @@
   grid-template-columns: 1fr 1fr;
   width: 90%;
   gap: 30px 10px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 }
 
-.name-skill{
-  font-size: 26px;
+.name-skill {
+  @include text(26px, $text-dark, bold);
   text-transform: uppercase;
-  color: #333333;
-  font-weight: bold;
 }
 
 .skill span {
-  font-weight: 500;
-  font-size: 16px;
+  @include text(16px, $text-dark, 500);
 }
 
 .skill input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  width: 120px;
-  height: 10px;
+  @include size(120px, 10px);
   background: #d3d3d3;
   outline: none;
   overflow: hidden;
-}
 
-.skill input[type="range"]::-webkit-slider-runnable-track {
-  background: #d3d3d3;
-}
+  &::-webkit-slider-runnable-track {
+    background: #d3d3d3;
+  }
 
-.skill input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 0;
-  height: 0;
-  box-shadow: -200px 0 0 200px #ff6c00;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+    box-shadow: -200px 0 0 200px $accent;
+  }
 }
 
 .circle-wrapper {
@@ -117,32 +134,30 @@
 }
 
 .circle {
-  width: 74px;
-  height: 74px;
+  @include size(74px, 74px);
   position: relative;
-}
 
-.circle svg {
-  width: 74px;
-  height: 74px;
-  transform: rotate(0deg);
+  svg {
+    @include size(74px, 74px);
+    transform: rotate(0deg);
+  }
 }
 
 circle {
   fill: none;
   stroke-width: 6px;
   stroke-linecap: round;
-}
 
-circle:first-child {
-  stroke: #ddd;
-}
+  &:first-child {
+    stroke: #ddd;
+  }
 
-circle:last-child {
-  stroke: #ff6600;
-  stroke-dasharray: 186;
-  stroke-dashoffset: calc(186 - (186 * var(--percent)) / 100);
-  transition: stroke-dashoffset 1s ease;
+  &:last-child {
+    stroke: $accent;
+    stroke-dasharray: 186;
+    stroke-dashoffset: calc(186 - (186 * var(--percent)) / 100);
+    transition: stroke-dashoffset 1s ease;
+  }
 }
 
 .value {
@@ -150,10 +165,32 @@ circle:last-child {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 15px;
-  font-weight: bold;
+  @include text(15px, $text-dark, bold);
 }
 
+@media (max-width: 1024px) {
+  .skills-pad {
+    padding-left: 40px;
+  }
 
+  .language-pad {
+    margin-left: 0;
+  }
+}
 
+@media (max-width: 600px) {
+  .dis {
+    flex-direction: column;
+    gap: 20px;
+  }
 
+  .skills-pad,
+  .language-pad {
+    padding-left: 20px;
+  }
+
+  .skil,
+  .skil-2 {
+    margin-left: 0;
+  }
+}
